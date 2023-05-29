@@ -33,6 +33,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>select_role</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(e) {
+                e.preventDefault(); // Prevent form submission
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = new FormData(form[0]);
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response);
+                        
+                        $('.alert').remove();
+                        form.prepend('<div class="alert alert-success">Role added successfully.</div>');
+                        form[0].reset(); 
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        
+                        $('.alert').remove();
+                        form.prepend('<div class="alert alert-danger">An error occurred while adding the role. Please try again later.</div>');
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="form-container">

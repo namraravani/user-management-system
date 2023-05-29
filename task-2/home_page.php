@@ -83,6 +83,13 @@ $conn->close();
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                    <?php
+                    if (strpos($permission, 'product') !== false) {
+                        echo '<button type="button" class="btn btn-outline-warning" onclick="window.location.href = \'display_product_table.php\'">Product</button>';
+                    }
+                    ?>
+                </li>
                 <li class="nav-item">
                     <?php
                     if (strpos($permission, 'register') !== false) {

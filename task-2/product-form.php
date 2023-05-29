@@ -39,6 +39,30 @@
         img: {
           fileExtension: 'Only PNG and JPEG images are allowed.'
         }
+      },
+      submitHandler: function(form) {
+        $.ajax({
+          url: $(form).attr('action'),
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            console.log(response);
+            // Handle the response as needed
+            // For example, display a success message
+            $('.alert').remove();
+            $('#product-form').prepend('<div class="alert alert-success">Product added successfully.</div>');
+            form.reset(); // Reset the form
+          },
+          error: function(xhr, status, error) {
+            console.error(error);
+            // Handle the error as needed
+            // For example, display an error message
+            $('.alert').remove();
+            $('#product-form').prepend('<div class="alert alert-danger">An error occurred while adding the product. Please try again later.</div>');
+          }
+        });
       }
     });
   });
